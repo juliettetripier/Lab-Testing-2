@@ -58,6 +58,11 @@ class PartyTestsDatabase(unittest.TestCase):
         db.drop_all()
 
     def test_games(self):
+        self.client.post("/rsvp",
+                                  data={"name": "Jane",
+                                        "email": "jane@jane.com"},
+                                  follow_redirects=True)
+
         result = self.client.get("/games")
         self.assertIn(b"Clue", result.data)
 
